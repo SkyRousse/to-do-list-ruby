@@ -1,36 +1,13 @@
-require('rspec')
-require('task')
+require('spec_helper')
 
 describe(Task) do
-  before() do
-    Task.clear()
-  end
-  describe('#description') do
-    it('lets you give it a description') do
-    test_task = Task.new('scrub the zebra')
-    expect(test_task.description()).to(eq('scrub the zebra'))
-    end
-  end
-
-  describe('.all') do
-    it('is empty at first') do
-      expect(Task.all()).to(eq([]))
-    end
-  end
-
-  describe('#save') do
-    it('adds a task to the array of saved tasks') do
-      test_task = Task.new('wash the lion')
-      test_task.save()
-      expect(Task.all()).to(eq([test_task]))
-    end
-  end
-
-  describe('.clear') do
-    it('empties out all of the saved tasks') do
-      Task.new('wash the lion').save()
-      Task.clear()
-      expect(Task.all()).to(eq([]))
+  describe(".not_done") do
+    it('returns the not done tasks') do
+      not_done_task1 = Task.create({:description => "gonna do it", :done => false})
+      not_done_task2 = Task.create({:description => "gonn do it tooo", :done => false})
+      not_done_tasks = [not_done_task1, not_done_task2]
+      done_task = Task.create({:description => "done task", :done => true})
+      expect(Task.not_done()).to(eq(not_done_tasks))
     end
   end
 end

@@ -3,8 +3,8 @@
 <p>Hear are all your tasks:</p>
 
 <ul>
-  <% @tasks.each() do |task| %>
-  <li><%= task.description() %></li>
+  <% @tasks.not_done().each() do |task| %>
+  <li><%= task.description() %><a href="/tasks/<%= task.id() %>/edit">Update this task's description</a></li></li>
   <% end %>
 </ul>
 
